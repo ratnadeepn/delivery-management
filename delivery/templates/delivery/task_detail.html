@@ -1,0 +1,56 @@
+{% extends 'delivery/visitor.html' %}
+{% block title %}Task Detail{% endblock%}
+{% block body%}
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+
+<div class="container">
+    <div class="row">
+
+        <div class="col-md-12">
+            <div class="table-responsive">
+                <table id="mytable" class="table table-bordred table-striped">
+                    <thead>
+                    <th>Title</th>
+                    <th>Priority</th>
+                    <th>Creation Date</th>
+                    <th>Created by</th>
+                    <th>Status Transition</th>
+
+                    </thead>
+                    <tbody>
+                    {% csrf_token %}
+
+
+                    <tr>
+                    <td>{{ task.title }}</td>
+                    <td>{{ task.priority }}</td>
+                    <td>{{ task.creation_date }}</td>
+                    <td>{{ task.created_by }}</td>
+                    <td>{{ task.transition }}</td>
+
+                    </tr>
+
+
+                    </tbody>
+
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+
+
+function relocate_home()
+{
+     location.href = "{% url 'logout_user' %}";
+}
+
+</script>
+
+
+{% endblock %}

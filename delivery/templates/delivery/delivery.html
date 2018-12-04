@@ -1,0 +1,56 @@
+{% extends 'delivery/visitor.html' %}
+{% block title %}Task List{% endblock %}
+
+{% block body%}
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+
+
+<div class="container">
+    <div class="row">
+        <div class="col-sm-4">
+            <ul>
+                <li>
+                    <p>{{ item.title }}&nbsp;-&nbsp;{{ item.priority }}&nbsp;-&nbsp;{{ item.status }}</p>
+{% csrf_token %}
+                    {% if allow_accept %}
+                    <button class="btn btn-primary" id="accept" onclick="location.href='{% url 'accept_task' item.id %}'">Accept</button>
+                    {% else %}
+                    <button class="btn btn-primary" id="no-accept" onclick=alert disabled>Accept</button>
+                    {% endif %}
+                    </li>
+            </ul>
+        </div>
+    </div>
+    <br/>
+    <br/>
+    <div class="row">
+        <div class="col-sm-8">
+            <ul>
+                {% for task in accepted_task_of_user %}
+                    <li>
+                        {% csrf_token %}
+                        <p><a href="{% url 'task_detail' task.id %}">{{ task.title }}</a>&nbsp;{{ task.status }}
+                        <button class="btn btn-danger" id="decline" onclick="location.href='{% url 'decline_task' task.id %}'">Decline</button>
+                        <button class="btn btn-success" id="completed" onclick="location.href='{% url 'complete_task' task.id %}'">Complete</button></p>
+
+                    </li>
+                {% endfor %}
+            </ul>
+
+        </div>
+
+    </div>
+
+</div>
+<script>
+function relocate_home()
+{
+     location.href = "{% url 'logout_user' %}";
+}
+
+</script>
+{% endblock %}
